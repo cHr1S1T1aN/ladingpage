@@ -1,0 +1,626 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* 🎨 Variáveis */
+:root {
+  --primary: #007bff;
+  --primary-dark: #0056b3;
+  --secondary: #28a745;
+  --secondary-dark: #218838;
+  --text: #2c2c2c;
+  --bg-light: #f9f9f9;
+  --bg-dark: #1e1e1e;
+  --white: #ffffff;
+  --font: 'Inter', sans-serif;
+}
+
+/* 🔄 Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body > *:not(footer) {
+  flex: 1 0 auto;
+  background-color: #ffffff; /* ou a cor que combine com o Hero */
+}
+
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 🧭 Navbar */
+.navbar {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+.logo span {
+  color: #fff;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 25px;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: var(--white);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* 🏔️ Hero */
+.hero {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--white);
+  text-align: center;
+  padding: 10px 20px;
+  position: relative;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  overflow: hidden; /* 👈 impede que qualquer conteúdo ultrapasse os cantos */
+}
+
+
+.hero h1,
+.hero p {
+  color: #ffffff;
+}
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--white);
+  text-align: center;
+  padding: 10px 20px;
+ border-bottom-left-radius: 40px;  /* arredonda canto inferior esquerdo */
+  border-bottom-right-radius: 40px; /* arredonda canto inferior direito */
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4); /* camada preta semitransparente */
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1; /* garante que o texto e imagem fiquem acima da camada escura */
+}
+
+.hero-content img {
+  max-width: 250px;   /* controla a largura máxima da imagem */
+  height: auto;       /* mantém proporção */
+  margin-top: 20px;
+}
+
+
+
+.hero-content h1 {
+  margin-top: -20px;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.btn {
+  margin-bottom: 20px;
+  display: inline-block;
+  background: var(--white);
+  color: var(--primary);
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn:hover {
+  background: var(--primary-dark);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.btn-primary {
+  background: var(--secondary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--secondary-dark);
+}
+
+/* 📑 Seções gerais */
+section {
+  margin-top: 0px;
+  padding: 80px 0;
+  background-color: var(--bg-light);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h2 {
+  font-size: 2.3rem;
+  margin-bottom: 40px;
+  color: var(--primary);
+  text-align: center;
+}
+
+/* 💡 Features */
+.features-section {
+  background-color: var(--white);
+}
+
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.feature-item {
+  flex: 1 1 300px;
+  background: var(--white);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.feature-item img {
+  max-width: 250px;
+  margin-bottom: 15px;
+  border-radius: 20px;
+}
+#imagebugada{
+  height: 350px;
+  margin-top: 20px;
+}
+#textimgfeature{
+  margin-top: 1px;
+}
+
+/* 📘 Sobre Nós */
+.about-section {
+  background-color: #f0fdf4;
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.about-item {
+  flex: 1 1 400px;
+  background: var(--white);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+  min-height: 220px; /* aumenta a altura mínima */
+}
+.about-item ul {
+  list-style: none;       /* remove as bolinhas */
+  padding-left: 0;
+  margin: 0;
+}
+.about-item ul li {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.about-item ul li strong {
+  color: var(--primary);  /* deixa o texto em negrito azul */
+  font-weight: 600;
+}
+.about-item h3 {
+  color: var(--primary); /* azul definido nas variáveis */
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.about-item:hover {
+  transform: translateY(-5px);
+}
+.about-item:last-child {
+  flex-basis: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 10;
+  text-align: center;
+}
+.about-item:last-child ul li strong {
+  display: inline-block;
+  width: 140px;         /* largura fixa para alinhar todos os títulos */
+  color: var(--primary);
+  font-weight: 600;
+}
+
+#alinhandosobrenos1{
+  margin-left: -170px;
+  display: inline-block;
+  width: 130px;         /* ajusta para o maior título */
+  color: var(--primary);
+  font-weight: 600;
+}
+#alinhandosobrenos2{
+  margin-left: -148px;
+  display: inline-block;
+  width: 130px;         /* ajusta para o maior título */
+  color: var(--primary);
+  font-weight: 600;
+}
+#alinhandosobrenos3{
+  margin-left: -141px;
+  display: inline-block;
+  width: 130px;         /* ajusta para o maior título */
+  color: var(--primary);
+  font-weight: 600;
+}
+.valores-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+  flex-wrap: wrap; /* garante responsividade */
+}
+.valores-content ul {
+  flex: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.valores-content ul li {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+.valores-content ul li strong {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+#imagesobrenos {
+  max-width: 200px;
+  height: auto;
+  border-radius: 12px;
+  flex-shrink: 0; /* impede que a imagem seja comprimida */
+}
+
+
+/* 🔹 NOVO layout simplificado */
+#site.about-section {
+  background: #f8fafc;
+  padding: 100px 0;
+}
+
+.about-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  padding: 35px 25px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.about-card h3 {
+  color: var(--primary);
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+.about-card p {
+  color: #444;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+.about-grid {
+  display: flex;              /* coloca os itens em linha */
+  justify-content: center;    /* centraliza horizontalmente */
+  gap: 30px;                  /* espaço entre os cards */
+  flex-wrap: wrap;            /* permite quebrar linha em telas menores */
+}
+
+.about-card {
+  flex: 1 1 300px;            /* cada card ocupa espaço flexível */
+  max-width: 320px;           /* largura máxima */
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  padding: 25px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* 🤖 Fivy e App */
+.fivy-card, .app-card {
+  background: var(--white);
+  padding: 40px 60px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+}
+
+.fivy-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  margin-top: 40px; /* 👈 empurra o texto para baixo */
+}
+
+.fivy-card {
+  background: var(--white);
+  padding: 10px 10px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+}
+.app-card {
+  font-size: 0.95rem; /* texto menor */
+  padding: 20px;      /* menos espaço interno */
+  background: var(--white);
+  padding: 10px 10px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;   /* coloca conteúdo em coluna */
+  align-items: center;      /* centraliza horizontalmente */
+  text-align: center;       /* centraliza texto */
+  gap: 30px;
+
+}
+#app-card-img {
+  max-width: 200px; /* imagens menores e equilibradas */
+  height: auto;
+  border-radius: 10px;
+  align-self: center;
+}
+
+/* 🚀 CTA */
+.cta-section {
+  background: #007bff;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  margin-bottom: 0;
+}
+
+.fivy-content h2 {
+  margin-top: 160px;
+   margin-bottom: 20px;
+}
+
+.fivy-content p {
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.cta-section p {
+  font-size: 1.1em;
+  margin-bottom: 25px;
+}
+
+.cta-section .btn-primary {
+  background: #28a745;
+  color: #fff;
+  padding: 15px 40px;
+  border-radius: 30px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s;
+}
+
+.cta-section .btn-primary:hover {
+  background: #218838;
+}
+.cta-section h2,
+.cta-section p {
+  color: var(--white); /* texto branco */
+}
+
+/* --- FOOTER --- */
+footer {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 30px 10px;
+  font-size: 0.95em;
+  border-top: 3px solid #007bff;
+  margin-top: auto;
+}
+
+footer p {
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* ✨ Animações */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* 🌟 Lista estilizada dentro da seção App */
+.app-features {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.app-features .feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #f8fafc;
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.app-features .feature:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.app-features i {
+  color: #007bff;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.app-card {
+  background: var(--white);
+  padding: 40px 60px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;   /* coloca conteúdo em coluna */
+  align-items: center;      /* centraliza horizontalmente */
+  text-align: center;       /* centraliza texto */
+  gap: 30px;
+}
+
+.app-card img {
+  max-width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;           /* garante centralização */
+}
+.site-empresas-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 60px; /* espaço entre os blocos */
+}
+
+.site-block h3,
+.empresas-block h3 {
+  text-align: center;
+  color: var(--primary);
+  margin-bottom: 30px;
+}
+.features-section h3 {
+  color: var(--primary); /* azul definido na variável */
+  font-weight: 700;      /* mantém destaque */
+}
+
+.about-grid,
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+.about-card,
+.feature-item {
+  flex: 1 1 280px;
+  max-width: 320px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  padding: 25px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover,
+.feature-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.about-card h4,
+.feature-item h4 {
+  color: var(--primary);
+  margin-bottom: 12px;
+}
