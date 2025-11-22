@@ -50,6 +50,7 @@
       position: relative;
     }
 
+   
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -58,7 +59,7 @@
 
     /* 🧭 Navigation */
     .navbar {
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
@@ -67,21 +68,22 @@
       justify-content: space-between;
       align-items: center;
       z-index: 1000;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
+
+   
 
     .navbar.scrolled {
       background: rgba(255, 255, 255, 0.98);
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     }
 
-    .logo {
+     .logo {
       font-size: 1.8rem;
       font-weight: 700;
-      color: var(--primary);
+      color: white;
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -89,12 +91,12 @@
     }
 
     .logo::before {
-      content: "⚡";
       font-size: 1.5rem;
       opacity: 0.9;
     }
 
     .nav-links {
+      color: white;
       display: flex;
       list-style: none;
       gap: 2rem;
@@ -102,7 +104,7 @@
     }
 
     .nav-links a {
-      color: var(--text);
+      color: white;
       text-decoration: none;
       font-weight: 500;
       padding: 0.5rem 1rem;
@@ -447,6 +449,7 @@
     }
 
     .problem-statement {
+      margin-top: 1;
       font-size: 1.3rem;
       line-height: 1.8;
       color: var(--text);
@@ -480,7 +483,13 @@
     }
 
     .problem-image img {
-      max-width: 100%;
+      max-width: 80%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+    }
+    #problem-image2 img {
+      max-width: 50%;
       height: auto;
       border-radius: 20px;
       box-shadow: var(--shadow-lg);
@@ -558,9 +567,10 @@
       background: var(--gradient);
       color: white;
       text-align: center;
-      padding: 120px 0;
+      padding: 60px 0;
+      padding-top: 2px;
       border-radius: 40px 40px 0 0;
-      margin-top: 50px;
+      margin-top: 30px;
     }
 
     .cta-section h2 {
@@ -822,22 +832,11 @@
           <li><a href="#fivy">Fivy</a></li>
           <li><a href="#cta">Contato</a></li>
         </ul>
-        <button class="mobile-menu-btn">
-          <i class="fas fa-bars"></i>
-        </button>
+
       </nav>
 
-      <div class="mobile-menu">
-        <button class="close-menu">
-          <i class="fas fa-times"></i>
-        </button>
-        <a href="#about">Sobre Nós</a>
-        <a href="#fivy">Fivy</a>
-        <a href="#cta">Contato</a>
-      </div>
-
       <div class="hero-content">
-        <img src="https://placehold.co/600x400/2563eb/ffffff?text=FiveConnect" alt="Estudante universitário ganhando confiança e competências para o mercado de trabalho">
+        <img src="./image/Gemini_Generated_Image_zg83f9zg83f9zg83-removebg-preview.png" alt="Estudante universitário ganhando confiança e competências para o mercado de trabalho">
         <h1>Nossa Startup</h1>
         <p>Tudo Sobre a FiveConnect!</p>
         <a href="#about" class="btn">Conheça Mais</a>
@@ -889,18 +888,20 @@
   </section>
 
   <!-- Nova Seção: Problema e Solução -->
+     
   <section class="problem-section">
     <div class="container">
       <div class="problem-content">
         <div class="problem-text">
-          <h2>Por Que Existimos</h2>
+          <div class="problem-image">
+          <img src="./image/business-people-working-in-the-office-scaled-1-1536x980.jpg" alt="FiveConnect - Simplificando conexões profissionais"><br>
+        </div>
+          <h2><br>Qual Problema de Mercado?</h2>
           <p class="problem-statement">
             Identificamos as dificuldades comuns em processos de contratação e busca por vagas. Por isso, criamos uma alternativa que traz uma nova experiência para simplificar essa jornada que, em algum momento, todos podemos enfrentar.
           </p>
         </div>
-        <div class="problem-image">
-          <img src="https://placehold.co/800x500/3b82f6/ffffff?text=FiveConnect+Solution" alt="FiveConnect - Simplificando conexões profissionais">
-        </div>
+      
       </div>
     </div>
   </section>
@@ -909,11 +910,27 @@
   <section id="fivy" class="fivy-section">
     <div class="container">
       <div class="fivy-card">
-        <img src="https://placehold.co/400x400/7c3aed/ffffff?text=Fivy" alt="Mascote Fivy da Five Connect">
+        <img src="./image/ChatGPT_Image_11_de_out._de_2025__14_47_25-removebg-preview 1.png" alt="Mascote Fivy da Five Connect">
         <div class="fivy-content">
           <h2>Conheça o Fivy, seu assistente pessoal!</h2>
           <p>O Fivy é seu parceiro digital na jornada profissional. Ele te orienta com dicas personalizadas, lembretes e oportunidades sob medida para o seu perfil.</p>
         </div>
+      </div>
+    </div>
+  </section>
+  <section class="problem-section">
+    <div class="container">
+      <div class="problem-content">
+        <div class="problem-text">
+          <div id="problem-image2">
+          <img src="./image/ChatGPT Image 21 de nov. de 2025, 22_56_20.png" alt="FiveConnect - Simplificando conexões profissionais"><br>
+        </div>
+          <h2><br>Nossa Solução</h2>
+          <p class="problem-statement">
+              Assim, desenvolvemos a Work-In como o produto principal da nossa empresa, FiveConnect. A plataforma foi criada para atuar no mercado de empregabilidade, oferecendo duas soluções integradas que conectam candidatos e empresas de forma moderna, eficiente e acessível
+          </p>
+        </div>
+      
       </div>
     </div>
   </section>
