@@ -4,9 +4,592 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FiveConnect</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    /* 🎨 Variáveis - Cores padronizadas */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #3b82f6;
+      --secondary: #059669;
+      --secondary-dark: #047857;
+      --accent: #7c3aed;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --bg-light: #f8fafc;
+      --bg-white: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+      --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+      --gradient-light: linear-gradient(135deg, #3b82f6, #60a5fa);
+      --gradient-subtle: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      --font: 'Inter', sans-serif;
+    }
+
+    /* 🔄 Reset e Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: var(--font);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-white);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 🧭 Navigation */
+    .navbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo::before {
+      content: "⚡";
+      font-size: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* 🏔️ Hero Section */
+    .hero {
+      background: var(--gradient);
+      color: white;
+      padding: 140px 0 100px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 0 40px 40px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-content img {
+      max-width: 320px;
+      height: auto;
+      margin: 0 auto 2rem;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+
+    .hero-content p {
+      font-size: 1.3rem;
+      margin-bottom: 2.5rem;
+      opacity: 0.95;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    /* 🎯 Botões */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1.2rem 2.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: var(--shadow);
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--primary);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn:hover {
+      background: white;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-primary {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--secondary-dark);
+    }
+
+    /* 📑 Seções Gerais */
+    section {
+      padding: 100px 0;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+      position: relative;
+    }
+
+    section.reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 🎯 Títulos Padronizados */
+    h1, h2, h3 {
+      color: var(--primary);
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+
+    h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* 🏢 Sobre a FiveConnect */
+    .about-intro {
+      background: var(--bg-white);
+      padding: 100px 0;
+    }
+
+    .about-intro-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-intro-content p {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      color: var(--text);
+      background: var(--gradient-subtle);
+      padding: 3rem;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    /* 🎯 Missão, Visão e Valores */
+    .mission-section {
+      background: var(--bg-light);
+      padding: 120px 0;
+    }
+
+    .mission-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+
+    .mission-top-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .mission-bottom-row {
+      width: 100%;
+    }
+
+    .mission-item, .values-item {
+      background: var(--bg-white);
+      padding: 3.5rem 2.5rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: all 0.4s ease;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mission-item::before, .values-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient);
+    }
+
+    .mission-item:hover, .values-item:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .mission-item h3, .values-item h3 {
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    .mission-item h3::after, .values-item h3::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 2px;
+      background: var(--primary-light);
+    }
+
+    .mission-item p {
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 1.1rem;
+    }
+
+    .values-list {
+      list-style: none;
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .values-list li {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      color: var(--text);
+    }
+
+    .values-list li:last-child {
+      border-bottom: none;
+    }
+
+    .values-list strong {
+      color: var(--primary);
+      font-weight: 600;
+      min-width: 140px;
+    }
+
+    .values-list li::before {
+      content: "•";
+      color: var(--primary-light);
+      font-weight: bold;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    /* 🎯 Nova Seção: Problema e Solução */
+    .problem-section {
+      background: var(--bg-white);
+      padding: 100px 0;
+    }
+
+    .problem-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .problem-text h2 {
+      font-size: 2.8rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+    }
+
+    .problem-statement {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      color: var(--text);
+      background: var(--gradient-subtle);
+      padding: 2.5rem;
+      border-radius: 20px;
+      border-left: 4px solid var(--primary);
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+    }
+
+    .problem-image {
+      text-align: center;
+    }
+
+    .problem-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* 🤖 Fivy Section */
+    .fivy-section {
+      background: var(--bg-white);
+      padding: 120px 0;
+    }
+
+    .fivy-card {
+      background: var(--gradient);
+      border-radius: 30px;
+      padding: 5rem 4rem;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 4rem;
+      align-items: center;
+      color: white;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fivy-card img {
+      width: 100%;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+    }
+
+    .fivy-content h2 {
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+
+    .fivy-content h2::after {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .fivy-content p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+
+    /* 🚀 CTA Section */
+    .cta-section {
+      background: var(--gradient);
+      color: white;
+      text-align: center;
+      padding: 120px 0;
+      border-radius: 40px 40px 0 0;
+      margin-top: 50px;
+    }
+
+    .cta-section h2 {
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-section h2::after {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .cta-section p {
+      font-size: 1.3rem;
+      margin-bottom: 3rem;
+      opacity: 0.95;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ⚫ Footer */
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+    }
+
+    footer p {
+      opacity: 0.8;
+    }
+
+    /* 📱 Responsividade */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem;
+      }
+      
+      .nav-links {
+        gap: 1rem;
+      }
+      
+      .nav-links a {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+      }
+      
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+      
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+      
+      h2 {
+        font-size: 2.2rem;
+      }
+      
+      .mission-top-row {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .fivy-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 3rem 2rem;
+        gap: 2rem;
+      }
+      
+      .about-intro-content p {
+        padding: 2rem;
+        font-size: 1.1rem;
+      }
+      
+      .mission-item, .values-item {
+        padding: 2.5rem 1.5rem;
+      }
+      
+      .values-list {
+        max-width: 100%;
+      }
+      
+      .values-list li {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+      
+      .values-list strong {
+        min-width: auto;
+      }
+      
+      .problem-statement {
+        padding: 2rem;
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+      
+      .btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+      
+      .mission-item, .values-item {
+        padding: 2rem 1rem;
+      }
+    }
+
+    /* ✨ Animações */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+  </style>
 </head>
 <body>
 
@@ -18,18 +601,16 @@
           <span class="five">FiveConnect</span>
         </a>
         <ul class="nav-links">
-          <li><a href="#features">Home</a></li>
-          <li><a href="#app">Aplicativo</a></li>
           <li><a href="#about">Sobre Nós</a></li>
+          <li><a href="#fivy">Fivy</a></li>
           <li><a href="#cta">Contato</a></li>
         </ul>
       </nav>
 
       <div class="hero-content">
         <img src="./image/Gemini_Generated_Image_zg83f9zg83f9zg83-removebg-preview.png" alt="Estudante universitário ganhando confiança e competências para o mercado de trabalho">
-
         <h1>Nossa Startup</h1>
-        <p>A FiveConnect nasceu para aproximar talentos e empresas. Ajudamos jovens profissionais a transformarem seu potencial em oportunidades reais conectando habilidades, sonhos e o futuro do trabalho.</p>
+        <p>Tudo Sobre a FiveConnect!</p>
         <a href="#about" class="btn">Conheça Mais</a>
       </div>
     </div>
@@ -50,28 +631,53 @@
     <div class="container">
       <h2>Missão, Visão e Valores</h2>
       <div class="mission-content">
-        <div class="mission-item">
-          <h3>Missão</h3>
-          <p>Conectar estudantes e empresas por meio da tecnologia, oferecendo experiências que impulsionam carreiras e tornam o recrutamento mais humano e eficiente.</p>
+        <!-- Primeira linha: Missão e Visão lado a lado -->
+        <div class="mission-top-row">
+          <div class="mission-item">
+            <h3>Missão</h3>
+            <p>Conectar estudantes e empresas por meio da tecnologia, oferecendo experiências que impulsionam carreiras e tornam o recrutamento mais humano e eficiente.</p>
+          </div>
+          <div class="mission-item">
+            <h3>Visão</h3>
+            <p>Ser a principal plataforma de conexão entre talentos e o mercado, transformando a entrada de jovens no mundo profissional.</p>
+          </div>
         </div>
-        <div class="mission-item">
-          <h3>Visão</h3>
-          <p>Ser a principal plataforma de conexão entre talentos e o mercado, transformando a entrada de jovens no mundo profissional.</p>
-        </div>
-        <div class="mission-item">
-          <h3>Valores</h3>
-          <ul>
-            <li><strong>Inovação:</strong> Usamos tecnologia para criar oportunidades.</li>
-            <li><strong>Conexão:</strong> Acreditamos no poder das redes e das relações.</li>
-            <li><strong>Confiança:</strong> Valorizamos o crescimento individual e coletivo.</li>
-            <li><strong>Acessibilidade:</strong> Tornamos o desenvolvimento profissional simples e acessível.</li>
-          </ul>
+        
+        <!-- Segunda linha: Valores abaixo -->
+        <div class="mission-bottom-row">
+          <div class="values-item">
+            <h3>Valores</h3>
+            <ul class="values-list">
+              <li><strong>Inovação:</strong> Usamos tecnologia para criar oportunidades.</li>
+              <li><strong>Conexão:</strong> Acreditamos no poder das redes e das relações.</li>
+              <li><strong>Confiança:</strong> Valorizamos o crescimento individual e coletivo.</li>
+              <li><strong>Acessibilidade:</strong> Tornamos o desenvolvimento profissional simples e acessível.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-<!-- 🤖 Fivy -->
+  <!-- Nova Seção: Problema e Solução -->
+   <div class="problem-image">
+          <img src="./image/935ec8203cc55dfadc4611ab4477ddb2.jpg" alt="FiveConnect - Simplificando conexões profissionais">
+        </div>
+  <section class="problem-section reveal">
+    <div class="container">
+      <div class="problem-content">
+        <div class="problem-text">
+          <h2>Por Que Existimos</h2>
+          <p class="problem-statement">
+            Identificamos as dificuldades comuns em processos de contratação e busca por vagas. Por isso, criamos uma alternativa que traz uma nova experiência para simplificar essa jornada que, em algum momento, todos podemos enfrentar.
+          </p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- 🤖 Fivy -->
   <section id="fivy" class="fivy-section reveal">
     <div class="container">
       <div class="fivy-card">
@@ -101,6 +707,40 @@
   </footer>
 
   <div id="toast"></div>
-  <script src="script.js"></script>
+  
+  <script>
+    // Animação de revelação ao scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal');
+        }
+      });
+    }, observerOptions);
+
+    // Observar todas as seções
+    document.querySelectorAll('section').forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Smooth scroll para links âncora
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
