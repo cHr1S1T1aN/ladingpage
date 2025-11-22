@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FiveConnect</title>
+  <title>FiveConnect - Aparecimento Progressivo</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
@@ -58,7 +58,7 @@
 
     /* 🧭 Navigation */
     .navbar {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
@@ -67,15 +67,21 @@
       justify-content: space-between;
       align-items: center;
       z-index: 1000;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     }
 
     .logo {
       font-size: 1.8rem;
       font-weight: 700;
-      color: white;
+      color: var(--primary);
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -96,7 +102,7 @@
     }
 
     .nav-links a {
-      color: white;
+      color: var(--text);
       text-decoration: none;
       font-weight: 500;
       padding: 0.5rem 1rem;
@@ -106,7 +112,8 @@
     }
 
     .nav-links a:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
       transform: translateY(-2px);
     }
 
@@ -114,7 +121,7 @@
     .hero {
       background: var(--gradient);
       color: white;
-      padding: 140px 0 100px;
+      padding: 180px 0 100px;
       position: relative;
       overflow: hidden;
       border-radius: 0 0 40px 40px;
@@ -133,6 +140,9 @@
       height: auto;
       margin: 0 auto 2rem;
       filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
     }
 
     .hero-content h1 {
@@ -140,14 +150,33 @@
       font-weight: 700;
       margin-bottom: 1.5rem;
       color: white;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease 0.2s;
     }
 
     .hero-content p {
       font-size: 1.3rem;
       margin-bottom: 2.5rem;
-      opacity: 0.95;
+      opacity: 0;
       line-height: 1.8;
       font-weight: 400;
+      transform: translateY(30px);
+      transition: all 0.8s ease 0.4s;
+    }
+
+    .hero-content .btn {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease 0.6s;
+    }
+
+    .hero-content.animate img,
+    .hero-content.animate h1,
+    .hero-content.animate p,
+    .hero-content.animate .btn {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* 🎯 Botões */
@@ -187,15 +216,7 @@
     /* 📑 Seções Gerais */
     section {
       padding: 100px 0;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 0.8s ease;
       position: relative;
-    }
-
-    section.reveal {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     /* 🎯 Títulos Padronizados */
@@ -215,6 +236,14 @@
       margin-bottom: 3rem;
       text-align: center;
       position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    h2.animate {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     h2::after {
@@ -255,6 +284,14 @@
       border-radius: 20px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease 0.3s;
+    }
+
+    .about-intro-content p.animate {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* 🎯 Missão, Visão e Valores */
@@ -289,7 +326,19 @@
       border: 1px solid var(--border);
       position: relative;
       overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
     }
+
+    .mission-item.animate, .values-item.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mission-item:nth-child(1) { transition-delay: 0.1s; }
+    .mission-item:nth-child(2) { transition-delay: 0.2s; }
+    .values-item { transition-delay: 0.3s; }
 
     .mission-item::before, .values-item::before {
       content: "";
@@ -342,7 +391,20 @@
       align-items: flex-start;
       gap: 1rem;
       color: var(--text);
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.6s ease;
     }
+
+    .values-list li.animate {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .values-list li:nth-child(1) { transition-delay: 0.1s; }
+    .values-list li:nth-child(2) { transition-delay: 0.2s; }
+    .values-list li:nth-child(3) { transition-delay: 0.3s; }
+    .values-list li:nth-child(4) { transition-delay: 0.4s; }
 
     .values-list li:last-child {
       border-bottom: none;
@@ -394,11 +456,27 @@
       border-left: 4px solid var(--primary);
       box-shadow: var(--shadow);
       margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease 0.2s;
+    }
+
+    .problem-statement.animate {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .problem-image {
       text-align: center;
       width: 100%;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease 0.4s;
+    }
+
+    .problem-image.animate {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .problem-image img {
@@ -426,11 +504,38 @@
       box-shadow: var(--shadow-lg);
       position: relative;
       overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .fivy-card.animate {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .fivy-card img {
       width: 100%;
       filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.8s ease 0.2s;
+    }
+
+    .fivy-card.animate img {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .fivy-content {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: all 0.8s ease 0.4s;
+    }
+
+    .fivy-card.animate .fivy-content {
+      opacity: 1;
+      transform: translateX(0);
     }
 
     .fivy-content h2 {
@@ -474,6 +579,21 @@
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease 0.2s;
+    }
+
+    .cta-section .btn {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease 0.4s;
+    }
+
+    .cta-section.animate p,
+    .cta-section.animate .btn {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ⚫ Footer */
@@ -523,7 +643,7 @@
       }
       
       .hero {
-        padding: 120px 0 80px;
+        padding: 140px 0 80px;
       }
       
       .hero-content h1 {
@@ -636,7 +756,7 @@
         display: block;
         background: none;
         border: none;
-        color: white;
+        color: var(--text);
         font-size: 1.5rem;
         cursor: pointer;
       }
@@ -686,28 +806,12 @@
         cursor: pointer;
       }
     }
-
-    /* ✨ Animações */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .reveal {
-      animation: fadeInUp 0.8s ease forwards;
-    }
   </style>
 </head>
 <body>
 
   <!-- 🌟 Hero -->
-  <header class="hero reveal">
+  <header class="hero">
     <div class="container">
       <nav class="navbar">
         <a href="#" class="logo">
@@ -718,10 +822,22 @@
           <li><a href="#fivy">Fivy</a></li>
           <li><a href="#cta">Contato</a></li>
         </ul>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
       </nav>
 
+      <div class="mobile-menu">
+        <button class="close-menu">
+          <i class="fas fa-times"></i>
+        </button>
+        <a href="#about">Sobre Nós</a>
+        <a href="#fivy">Fivy</a>
+        <a href="#cta">Contato</a>
+      </div>
+
       <div class="hero-content">
-        <img src="./image/Gemini_Generated_Image_zg83f9zg83f9zg83-removebg-preview.png" alt="Estudante universitário ganhando confiança e competências para o mercado de trabalho">
+        <img src="https://placehold.co/600x400/2563eb/ffffff?text=FiveConnect" alt="Estudante universitário ganhando confiança e competências para o mercado de trabalho">
         <h1>Nossa Startup</h1>
         <p>Tudo Sobre a FiveConnect!</p>
         <a href="#about" class="btn">Conheça Mais</a>
@@ -730,7 +846,7 @@
   </header>
 
   <!-- Sobre a FiveConnect -->
-  <section id="about" class="about-intro reveal">
+  <section id="about" class="about-intro">
     <div class="container">
       <div class="about-intro-content">
         <h2>Sobre a FiveConnect</h2>
@@ -740,7 +856,7 @@
   </section>
 
   <!-- Missão, Visão e Valores -->
-  <section class="mission-section reveal">
+  <section class="mission-section">
     <div class="container">
       <h2>Missão, Visão e Valores</h2>
       <div class="mission-content">
@@ -773,7 +889,7 @@
   </section>
 
   <!-- Nova Seção: Problema e Solução -->
-  <section class="problem-section reveal">
+  <section class="problem-section">
     <div class="container">
       <div class="problem-content">
         <div class="problem-text">
@@ -783,17 +899,17 @@
           </p>
         </div>
         <div class="problem-image">
-          <img src="./image/935ec8203cc55dfadc4611ab4477ddb2.jpg" alt="FiveConnect - Simplificando conexões profissionais">
+          <img src="https://placehold.co/800x500/3b82f6/ffffff?text=FiveConnect+Solution" alt="FiveConnect - Simplificando conexões profissionais">
         </div>
       </div>
     </div>
   </section>
 
   <!-- 🤖 Fivy -->
-  <section id="fivy" class="fivy-section reveal">
+  <section id="fivy" class="fivy-section">
     <div class="container">
       <div class="fivy-card">
-        <img src="./image/ChatGPT_Image_11_de_out._de_2025__14_47_25-removebg-preview 1.png" alt="Mascote Fivy da Five Connect">
+        <img src="https://placehold.co/400x400/7c3aed/ffffff?text=Fivy" alt="Mascote Fivy da Five Connect">
         <div class="fivy-content">
           <h2>Conheça o Fivy, seu assistente pessoal!</h2>
           <p>O Fivy é seu parceiro digital na jornada profissional. Ele te orienta com dicas personalizadas, lembretes e oportunidades sob medida para o seu perfil.</p>
@@ -803,7 +919,7 @@
   </section>
 
   <!-- 🚀 CTA -->
-  <section id="cta" class="cta-section reveal">
+  <section id="cta" class="cta-section">
     <div class="container">
       <h2>Pronto para dar o próximo passo?</h2>
       <p>Conecte-se ao futuro do trabalho. Cadastre-se e transforme seu potencial em oportunidade.</p>
@@ -812,32 +928,81 @@
   </section>
 
   <!-- ⚫ Rodapé -->
-  <footer class="reveal">
+  <footer>
     <div class="container">
       <p>&copy; 2025 FiveConnect. Todos os direitos reservados.</p>
     </div>
   </footer>
 
-  <div id="toast"></div>
-  
   <script>
     // Animação de revelação ao scroll
     const observerOptions = {
-      threshold: 0.1,
+      threshold: 0.15,
       rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('reveal');
+          // Se for a seção hero, anima o conteúdo interno
+          if (entry.target.classList.contains('hero')) {
+            entry.target.querySelector('.hero-content').classList.add('animate');
+          } 
+          // Se for a seção CTA, anima o conteúdo interno
+          else if (entry.target.classList.contains('cta-section')) {
+            entry.target.classList.add('animate');
+          }
+          // Para outras seções, anima os elementos principais
+          else {
+            // Animar títulos h2
+            const h2 = entry.target.querySelector('h2');
+            if (h2 && !h2.classList.contains('animate')) {
+              h2.classList.add('animate');
+            }
+            
+            // Animar parágrafos com a classe animate
+            const paragraphs = entry.target.querySelectorAll('p.animate, .problem-statement, .about-intro-content p');
+            paragraphs.forEach(p => {
+              if (!p.classList.contains('animate')) {
+                p.classList.add('animate');
+              }
+            });
+            
+            // Animar cards de missão e valores
+            const missionItems = entry.target.querySelectorAll('.mission-item, .values-item');
+            missionItems.forEach(item => {
+              if (!item.classList.contains('animate')) {
+                item.classList.add('animate');
+              }
+            });
+            
+            // Animar lista de valores
+            const valueItems = entry.target.querySelectorAll('.values-list li');
+            valueItems.forEach(item => {
+              if (!item.classList.contains('animate')) {
+                item.classList.add('animate');
+              }
+            });
+            
+            // Animar imagem do problema
+            const problemImage = entry.target.querySelector('.problem-image');
+            if (problemImage && !problemImage.classList.contains('animate')) {
+              problemImage.classList.add('animate');
+            }
+            
+            // Animar card Fivy
+            const fivyCard = entry.target.querySelector('.fivy-card');
+            if (fivyCard && !fivyCard.classList.contains('animate')) {
+              fivyCard.classList.add('animate');
+            }
+          }
         }
       });
     }, observerOptions);
 
-    // Observar todas as seções
-    document.querySelectorAll('section').forEach((section) => {
-      observer.observe(section);
+    // Observar todas as seções e elementos específicos
+    document.querySelectorAll('section, .hero').forEach((element) => {
+      observer.observe(element);
     });
 
     // Smooth scroll para links âncora
@@ -876,6 +1041,24 @@
       link.addEventListener('click', () => {
         mobileMenu.classList.remove('active');
       });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Animar hero content imediatamente
+    document.addEventListener('DOMContentLoaded', () => {
+      const heroContent = document.querySelector('.hero-content');
+      setTimeout(() => {
+        heroContent.classList.add('animate');
+      }, 300);
     });
   </script>
 </body>

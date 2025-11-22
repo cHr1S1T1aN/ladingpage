@@ -1,32 +1,55 @@
-window.addEventListener('scroll', reveal);
+// script.js
+// Prevenir scroll automático
+document.addEventListener('DOMContentLoaded', function() {
+  window.scrollTo(0, 0);
+  history.scrollRestoration = "manual";
+});
 
-function reveal() {
-  const reveals = document.querySelectorAll('.reveal');
-  const windowHeight = window.innerHeight;
+// Animação de revelação ao scroll
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
 
-  reveals.forEach((el) => {
-    const elementTop = el.getBoundingClientRect().top;
-    const revealPoint = 120;
-    if (elementTop < windowHeight - revealPoint) {
-      el.classList.add('active');
-    } else {
-      el.classList.remove('active');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('reveal');
     }
-
   });
+}, observerOptions);
+
+// Observar todas as seções
+document.querySelectorAll('section').forEach((section) => {
+  observer.observe(section);
+});
+
+// Smooth scroll para links âncora
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Adicionar estrelas cadentes dinamicamente
+function createShootingStars() {
+  const starsContainer = document.createElement('div');
+  starsContainer.className = 'shooting-stars';
+  
+  for (let i = 0; i < 6; i++) {
+    const star = document.createElement('div');
+    star.className = 'shooting-star';
+    starsContainer.appendChild(star);
+  }
+  
+  document.body.appendChild(starsContainer);
 }
-function showToast(message, type = "success") {
-  const toast = document.getElementById("toast");
 
-  // Define cor da borda conforme o tipo
-  if (type === "success") toast.style.borderLeft = "6px solid #28a745";
-  else if (type === "error") toast.style.borderLeft = "6px solid #dc3545";
-  else toast.style.borderLeft = "6px solid #007bff";
-
-  toast.textContent = message;
-  toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 3000);
-}
+createShootingStars();
