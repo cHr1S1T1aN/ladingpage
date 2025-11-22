@@ -398,6 +398,7 @@
 
     .problem-image {
       text-align: center;
+      width: 100%;
     }
 
     .problem-image img {
@@ -488,6 +489,25 @@
     }
 
     /* 📱 Responsividade */
+    @media (max-width: 1024px) {
+      .container {
+        padding: 0 30px;
+      }
+      
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+      
+      h2 {
+        font-size: 2.4rem;
+      }
+      
+      .fivy-card {
+        padding: 4rem 3rem;
+        gap: 3rem;
+      }
+    }
+
     @media (max-width: 768px) {
       .navbar {
         padding: 1rem;
@@ -502,8 +522,12 @@
         font-size: 0.9rem;
       }
       
+      .hero {
+        padding: 120px 0 80px;
+      }
+      
       .hero-content h1 {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
       }
       
       .hero-content p {
@@ -511,7 +535,7 @@
       }
       
       h2 {
-        font-size: 2.2rem;
+        font-size: 2rem;
       }
       
       .mission-top-row {
@@ -553,11 +577,27 @@
         padding: 2rem;
         font-size: 1.1rem;
       }
+      
+      section {
+        padding: 80px 0;
+      }
+      
+      .mission-section, .fivy-section {
+        padding: 80px 0;
+      }
+      
+      .cta-section {
+        padding: 80px 0;
+      }
     }
 
     @media (max-width: 480px) {
+      .container {
+        padding: 0 20px;
+      }
+      
       .hero-content h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
       }
       
       h2 {
@@ -571,6 +611,79 @@
       
       .mission-item, .values-item {
         padding: 2rem 1rem;
+      }
+      
+      .fivy-card {
+        padding: 2.5rem 1.5rem;
+      }
+      
+      .about-intro-content p {
+        padding: 1.5rem;
+      }
+      
+      .problem-statement {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Menu mobile */
+    @media (max-width: 640px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+      
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+      
+      .mobile-menu.active {
+        transform: translateX(0);
+      }
+      
+      .mobile-menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+        margin: 1rem 0;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+      }
+      
+      .mobile-menu a:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      
+      .close-menu {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
       }
     }
 
@@ -660,9 +773,6 @@
   </section>
 
   <!-- Nova Seção: Problema e Solução -->
-   <div class="problem-image">
-          <img src="./image/935ec8203cc55dfadc4611ab4477ddb2.jpg" alt="FiveConnect - Simplificando conexões profissionais">
-        </div>
   <section class="problem-section reveal">
     <div class="container">
       <div class="problem-content">
@@ -672,7 +782,9 @@
             Identificamos as dificuldades comuns em processos de contratação e busca por vagas. Por isso, criamos uma alternativa que traz uma nova experiência para simplificar essa jornada que, em algum momento, todos podemos enfrentar.
           </p>
         </div>
-        
+        <div class="problem-image">
+          <img src="./image/935ec8203cc55dfadc4611ab4477ddb2.jpg" alt="FiveConnect - Simplificando conexões profissionais">
+        </div>
       </div>
     </div>
   </section>
@@ -739,6 +851,30 @@
             block: 'start'
           });
         }
+      });
+    });
+
+    // Menu mobile
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const closeMenuBtn = document.querySelector('.close-menu');
+    
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('active');
+      });
+    }
+    
+    if (closeMenuBtn) {
+      closeMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+    }
+    
+    // Fechar menu ao clicar em um link
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
       });
     });
   </script>
